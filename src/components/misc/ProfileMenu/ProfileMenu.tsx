@@ -1,17 +1,17 @@
 import { LogOut, Monitor, Moon, Sun, UserCog } from "lucide-react";
-import { Avatar, AvatarImage } from "src/components/ui/avatar";
+import { Avatar, AvatarImage } from "../../ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from "src/components/ui/dropdown";
+} from "../../ui/dropdown";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "src/components/ui/select";
+} from "../../ui/select";
 import React from "react";
 
 interface Props {

@@ -3,15 +3,20 @@
   "private": true,
   "version": "0.0.1",
   "type": "module",
-  "files": ["dist"],
-  "main": "dist/core-ui-umd.cjs",
-  "module": "dist/simple-ui.js",
+  "main": "./src/main.ts",
+  "module": "./src/main.ts",
+  "types": "./src/main.ts",
   "exports": {
-    "." : {
-      "import": "./dist/core-ui.js",
-      "require": "./dist/core-ui-umd.cjs"
+    ".": {
+      "types": "./src/main.ts",
+      "import": "./src/main.ts",
+      "require": "./src/main.ts"
     }
   },
+  "files": [
+    "src"
+  ],
+  "sideEffects": false,
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

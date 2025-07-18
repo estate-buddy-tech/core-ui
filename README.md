@@ -15,3 +15,21 @@ Run storybook:
 ```shellscript
 npm storybook
 ```
+
+## Setup and install
+
+```shellscript
+bun install git+https://github.com/estate-buddy-tech/core-ui.git
+```
+
+Add config in tailwind.config.ts
+```shellscript
+content: [
+  './node_modules/core-ui/src/**/*.{js,jsx,ts,tsx}',
+],
+```
+
+Import in your App
+```shellscript
+import ProfileMenu from 'core-ui'
+```

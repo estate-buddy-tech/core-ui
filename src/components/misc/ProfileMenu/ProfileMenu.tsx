@@ -13,78 +13,23 @@ import {
   SelectValue,
 } from "../../ui/select";
 import React from "react";
-
-interface IUserProps {
-  avatar_asset_id: string | null;
-  avatar_url: string;
-  confirmed_at: string | null;
-  created_at: string;
-  email: string;
-  first_name: string;
-  id: string;
-  last_name: string;
-  provider: string;
-  theme_preference: "light" | "dark" | "system";
-  updated_at: string;
-  username: string | null;
-  verified: boolean;
-  verified_at: string;
-}
+import { useProfileContext } from "src/provider/ProfileProvider";
 
 interface Props {
   selectedTheme: string;
   onSetTheme: (theme: string) => void;
   actionLogout: () => void;
-  token: string;
-  apiUrl: string;
+  actionProfile: () => void;
 }
 
 export function ProfileMenu({
   selectedTheme,
   onSetTheme,
   actionLogout,
-  token,
-  apiUrl,
+  actionProfile,
 }: Props) {
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
-  const [user, setUser] = React.useState<IUserProps>();
-  const [loading, setLoading] = React.useState(false);
-  const [error, setError] = React.useState<string | null>(null);
-
-  const fetchUser = React.useCallback(async () => {
-    if (!apiUrl || !token) {
-      setError("API URL or token is missing");
-      return;
-    }
-
-    setLoading(true);
-    setError(null);
-
-    try {
-      const res = await fetch(`${apiUrl}`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (res.status === 200) {
-        const userData = await res.json();
-        setUser(userData);
-      } else {
-        setError(`Failed to fetch user: ${res.status}`);
-      }
-    } catch (error: any) {
-      setError(`Network error: ${error.message}`);
-      console.error("Fetch user error:", error);
-    } finally {
-      setLoading(false);
-    }
-  }, [apiUrl, token]); // Dependencies
-
-  React.useEffect(() => {
-    fetchUser();
-  }, [fetchUser]);
+  const user = useProfileContext();
 
   return (
     <DropdownMenu open={isDropdownOpen} onOpenChange={setIsDropdownOpen}>
@@ -156,9 +101,7 @@ export function ProfileMenu({
           <div className="border-y py-2">
             <button
               className="flex w-full flex-row items-center gap-2 rounded-sm px-3 py-2 hover:bg-muted"
-              onClick={() => {
-                window.open("https://identies.estate-buddy.com/", "_blank");
-              }}
+              onClick={actionProfile}
             >
               <UserCog size={16} />
               <span>Your Profile</span>

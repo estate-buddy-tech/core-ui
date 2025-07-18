@@ -13,33 +13,29 @@ import {
   SelectValue,
 } from "../../ui/select";
 import React from "react";
+import { useProfileContext } from "../../../provider/ProfileProvider";
 
 interface Props {
-  avatar: string;
-  name: string;
-  email: string;
   selectedTheme: string;
   onSetTheme: (theme: string) => void;
-  actionProfile: () => void;
   actionLogout: () => void;
+  actionProfile: () => void;
 }
 
 export function ProfileMenu({
-  avatar,
-  name,
-  email,
   selectedTheme,
   onSetTheme,
-  actionProfile,
   actionLogout,
+  actionProfile,
 }: Props) {
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
+  const { user } = useProfileContext();
 
   return (
     <DropdownMenu open={isDropdownOpen} onOpenChange={setIsDropdownOpen}>
       <DropdownMenuTrigger asChild className="cursor-pointer">
         <Avatar>
-          <AvatarImage src={avatar || "https://avatar.iran.liara.run/public"} />
+          <AvatarImage src={user?.avatar_url || "/images/default-avatar.jpg"} />
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent
@@ -50,13 +46,15 @@ export function ProfileMenu({
         <div className="mb-3 flex flex-row justify-center gap-x-3">
           <Avatar>
             <AvatarImage
-              src={avatar || "https://avatar.iran.liara.run/public"}
+              src={user?.avatar_url || "/images/default-avatar.jpg"}
             />
           </Avatar>
           <div className="flex flex-col justify-center">
-            <h1 className="font-semibold max-w-40 truncate">{name}</h1>
+            {user && (
+              <h1 className="font-semibold max-w-40 truncate">{`${user?.first_name} ${user?.last_name}`}</h1>
+            )}
             <p className="text-sm text-accent-foreground max-w-40 truncate">
-              {email}
+              {user?.email}
             </p>
           </div>
         </div>

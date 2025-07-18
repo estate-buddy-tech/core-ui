@@ -11,12 +11,9 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, "./src/main.ts"),
       name: "CoreUI",
-      // formats: ["es"],
       fileName: "core-ui",
     },
     rollupOptions: {
-      // make sure to externalize deps that shouldn't be bundled
-      // into your library
       external: ["react", "react-dom", "react/jsx-runtime"],
       output: {
         globals: {

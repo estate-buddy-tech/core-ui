@@ -29,7 +29,7 @@ export function ProfileMenu({
   actionProfile,
 }: Props) {
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
-  const user = useProfileContext();
+  const { user } = useProfileContext();
 
   return (
     <DropdownMenu open={isDropdownOpen} onOpenChange={setIsDropdownOpen}>

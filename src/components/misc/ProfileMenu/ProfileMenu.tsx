@@ -13,7 +13,7 @@ import {
   SelectValue,
 } from "../../ui/select";
 import React from "react";
-import { useProfileContext } from "src/provider/ProfileProvider";
+import { useProfileContext } from "../../../provider/ProfileProvider";
 
 interface Props {
   selectedTheme: string;

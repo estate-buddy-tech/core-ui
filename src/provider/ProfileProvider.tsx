@@ -1,7 +1,7 @@
 // src/context/ApiContext.js
 import React, { createContext, useContext } from "react";
-import { useIdenties } from "src/hooks/useIdentities";
-import type { User } from "src/types/user";
+import { useIdenties } from "../hooks/useIdentities";
+import type { User } from "../types/user";
 
 // 1. Create the context with the service as the default value
 const ApiContext = createContext<User | null>(null);

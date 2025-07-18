@@ -67,8 +67,10 @@ export function ProfileMenu({
   };
 
   React.useEffect(() => {
-    fetchUser();
-  }, []);
+    if (apiUrl && token) {
+      fetchUser();
+    }
+  }, [apiUrl, token]);
 
   return (
     <DropdownMenu open={isDropdownOpen} onOpenChange={setIsDropdownOpen}>

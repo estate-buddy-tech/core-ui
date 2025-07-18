@@ -48,7 +48,18 @@ export function ProfileMenu({
 }: Props) {
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
   const [user, setUser] = React.useState<IUserProps>();
-  const fetchUser = async () => {
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState<string | null>(null);
+
+  const fetchUser = React.useCallback(async () => {
+    if (!apiUrl || !token) {
+      setError("API URL or token is missing");
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+
     try {
       const res = await fetch(`${apiUrl}`, {
         method: "GET",
@@ -58,19 +69,22 @@ export function ProfileMenu({
       });
 
       if (res.status === 200) {
-        const user = await res.json();
-        setUser(user);
+        const userData = await res.json();
+        setUser(userData);
+      } else {
+        setError(`Failed to fetch user: ${res.status}`);
       }
-    } catch (error) {
-      console.log("error ", error);
+    } catch (error: any) {
+      setError(`Network error: ${error.message}`);
+      console.error("Fetch user error:", error);
+    } finally {
+      setLoading(false);
     }
-  };
+  }, [apiUrl, token]); // Dependencies
 
   React.useEffect(() => {
-    if (apiUrl && token) {
-      fetchUser();
-    }
-  }, [apiUrl, token]);
+    fetchUser();
+  }, [fetchUser]);
 
   return (
     <DropdownMenu open={isDropdownOpen} onOpenChange={setIsDropdownOpen}>

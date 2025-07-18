@@ -26,11 +26,11 @@ export const ProfileProvider: React.FC<IdentiesProviderProps> = ({
   );
 };
 
-export const useProfileContext = () => {
+export const useProfileContext = (): User => {
   const context = useContext(ApiContext);
   if (!context) {
     throw new Error(
-      "useIdentiesContext must be used within an IdentiesProvider"
+      "useProfileContext must be used within an IdentiesProvider"
     );
   }
   return context;

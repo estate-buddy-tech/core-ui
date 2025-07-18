@@ -14,32 +14,67 @@ import {
 } from "../../ui/select";
 import React from "react";
 
-interface Props {
-  avatar: string;
-  name: string;
+interface IUserProps {
+  avatar_asset_id: string | null;
+  avatar_url: string;
+  confirmed_at: string | null;
+  created_at: string;
   email: string;
+  first_name: string;
+  id: string;
+  last_name: string;
+  provider: string;
+  theme_preference: "light" | "dark" | "system";
+  updated_at: string;
+  username: string | null;
+  verified: boolean;
+  verified_at: string;
+}
+
+interface Props {
   selectedTheme: string;
   onSetTheme: (theme: string) => void;
-  actionProfile: () => void;
   actionLogout: () => void;
+  token: string;
+  apiUrl: string;
 }
 
 export function ProfileMenu({
-  avatar,
-  name,
-  email,
   selectedTheme,
   onSetTheme,
-  actionProfile,
   actionLogout,
+  token,
+  apiUrl,
 }: Props) {
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
+  const [user, setUser] = React.useState<IUserProps>();
+  const fetchUser = async () => {
+    try {
+      const res = await fetch(`${apiUrl}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (res.status === 200) {
+        const user = await res.json();
+        setUser(user);
+      }
+    } catch (error) {
+      console.log("error ", error);
+    }
+  };
+
+  React.useEffect(() => {
+    fetchUser();
+  }, []);
 
   return (
     <DropdownMenu open={isDropdownOpen} onOpenChange={setIsDropdownOpen}>
       <DropdownMenuTrigger asChild className="cursor-pointer">
         <Avatar>
-          <AvatarImage src={avatar || "https://avatar.iran.liara.run/public"} />
+          <AvatarImage src={user?.avatar_url || "/images/default-avatar.jpg"} />
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent
@@ -50,13 +85,15 @@ export function ProfileMenu({
         <div className="mb-3 flex flex-row justify-center gap-x-3">
           <Avatar>
             <AvatarImage
-              src={avatar || "https://avatar.iran.liara.run/public"}
+              src={user?.avatar_url || "/images/default-avatar.jpg"}
             />
           </Avatar>
           <div className="flex flex-col justify-center">
-            <h1 className="font-semibold max-w-40 truncate">{name}</h1>
+            {user && (
+              <h1 className="font-semibold max-w-40 truncate">{`${user?.first_name} ${user?.last_name}`}</h1>
+            )}
             <p className="text-sm text-accent-foreground max-w-40 truncate">
-              {email}
+              {user?.email}
             </p>
           </div>
         </div>
@@ -103,7 +140,9 @@ export function ProfileMenu({
           <div className="border-y py-2">
             <button
               className="flex w-full flex-row items-center gap-2 rounded-sm px-3 py-2 hover:bg-muted"
-              onClick={actionProfile}
+              onClick={() => {
+                window.open("https://identies.estate-buddy.com/", "_blank");
+              }}
             >
               <UserCog size={16} />
               <span>Your Profile</span>

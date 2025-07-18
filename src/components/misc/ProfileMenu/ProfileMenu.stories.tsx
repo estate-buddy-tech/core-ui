@@ -17,13 +17,11 @@ export const Default: Story = {
   render: (args) => {
     return (
       <ProfileMenu
-        avatar={args.avatar}
-        name={args.name}
-        email={args.email}
         selectedTheme={args.selectedTheme}
         onSetTheme={args.onSetTheme}
-        actionProfile={args.actionProfile}
         actionLogout={args.actionLogout}
+        apiUrl={args.apiUrl}
+        token={args.token}
       />
     );
   },

@@ -14,7 +14,6 @@ export interface IdentiesProviderProps {
 }
 
 export function IdentiesProvider({ children, config }: IdentiesProviderProps) {
-  // const identiesData = useIdenties(config);
   const identiesData = useIdenties(config);
 
   const contextValue: IdentiesContextValue = {
@@ -29,6 +28,7 @@ export function IdentiesProvider({ children, config }: IdentiesProviderProps) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useIdentiesContext(): IdentiesContextValue {
   const context = React.useContext(IdentiesContext);
   if (!context) {

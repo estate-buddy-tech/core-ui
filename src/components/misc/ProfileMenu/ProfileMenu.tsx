@@ -38,10 +38,18 @@ export function ProfileMenu({
     await updateUser({ theme_preference: value });
   };
 
-  if (loading || !user) {
+  if (loading) {
     return (
-      <div className="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full ring-1 ring-slate-300">
-        <img src={defaultAvatar} />
+      <div className="animate-pulse">
+        <div className="size-10 rounded-full bg-gray-200"></div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="relative flex size-10 shrink-0 overflow-hidden rounded-full ring-1 ring-slate-300">
+        <img src={defaultAvatar} alt="default-avatar" />
       </div>
     );
   }

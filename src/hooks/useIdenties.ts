@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, useCallback } from "react";
 import { createIdentiesClient, type IdentiesClientConfig } from "../api/client";
 import type { User, UserUpdate, ApiError } from "../types/user";
@@ -50,7 +51,6 @@ export function useIdenties(config: UseIdentiesConfig = {}): UseIdentiesReturn {
   // Update user function
   const updateUser = useCallback(
     async (userUpdate: UserUpdate) => {
-      setLoading(true);
       setError(null);
 
       try {
@@ -63,10 +63,9 @@ export function useIdenties(config: UseIdentiesConfig = {}): UseIdentiesReturn {
         setLoading(false);
       }
     },
-    [client]
+    [client, token]
   );
 
-  // Auto-fetch user on mount if enabled
   useEffect(() => {
     if (token) {
       fetchUser();

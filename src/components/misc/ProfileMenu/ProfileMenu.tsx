@@ -1,4 +1,4 @@
-import { useState } from "react";
+import * as React from "react";
 import { LogOut, Monitor, Moon, Sun, UserCog } from "lucide-react";
 import { Avatar, AvatarImage } from "../../ui/avatar";
 import {
@@ -30,7 +30,7 @@ export function ProfileMenu({
   actionProfile,
   defaultAvatar,
 }: Props) {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
   const { user, loading, updateUser } = useIdentiesContext();
 
   const onUpdateTheme = async (value: string) => {

@@ -19,7 +19,7 @@ export function IdentiesProvider({ children, config }: IdentiesProviderProps) {
 
   const contextValue: IdentiesContextValue = {
     ...identiesData,
-    client: createIdentiesClient, // Make sure to include client
+    client: createIdentiesClient,
   };
 
   return (

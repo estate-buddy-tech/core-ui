@@ -1,4 +1,4 @@
-// Types
+// Types;
 export * from "./types/user";
 
 // Client

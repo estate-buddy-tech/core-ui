@@ -16,7 +16,7 @@ export {
   IdentiesProvider,
   useIdentiesContext,
   type IdentiesProviderProps,
-} from "./provider/IdentiesProvder";
+} from "./provider/IdentiesProvider";
 
 // Component UI
 export { ProfileMenu } from "./components/misc/ProfileMenu/ProfileMenu";

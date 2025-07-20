@@ -28,7 +28,7 @@ export function useIdenties(config: UseIdentiesConfig = {}): UseIdentiesReturn {
 
   // State
   const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<ApiError | null>(null);
 
   // Fetch user function

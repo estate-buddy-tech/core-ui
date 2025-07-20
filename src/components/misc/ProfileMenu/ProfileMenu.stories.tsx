@@ -20,8 +20,8 @@ export const Default: Story = {
         selectedTheme={args.selectedTheme}
         onSetTheme={args.onSetTheme}
         actionLogout={args.actionLogout}
-        apiUrl={args.apiUrl}
-        token={args.token}
+        actionProfile={args.actionProfile}
+        defaultAvatar={args.defaultAvatar}
       />
     );
   },

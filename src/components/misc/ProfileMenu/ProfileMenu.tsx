@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { LogOut, Monitor, Moon, Sun, UserCog } from "lucide-react";
 import { Avatar, AvatarImage } from "../../ui/avatar";
 import {
@@ -12,8 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../../ui/select";
-import React from "react";
-import { useIdentiesContext } from "../../../provider/IdentiesProvder";
+import { useIdentiesContext } from "../../../provider/IdentiesProvider";
 
 interface Props {
   selectedTheme: string;
@@ -30,7 +30,7 @@ export function ProfileMenu({
   actionProfile,
   defaultAvatar,
 }: Props) {
-  const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { user, loading, updateUser } = useIdentiesContext();
 
   const onUpdateTheme = async (value: string) => {
@@ -38,7 +38,7 @@ export function ProfileMenu({
     await updateUser({ theme_preference: value });
   };
 
-  if (!user || loading) {
+  if (loading || !user) {
     return (
       <div className="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full ring-1 ring-slate-300">
         <img src={defaultAvatar} />

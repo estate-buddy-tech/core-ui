@@ -70,12 +70,12 @@ export function ProfileMenu({
                 src={user.avatar_url}
                 loading="lazy"
                 alt="test"
-                onLoad={() => setLoaded(true)}
+                onLoad={() => setTimeout(() => setLoaded(true), 1000)}
               />
             </Avatar>
             {!loaded && (
               <div className="animate-pulse absolute top-0">
-                <div className="size-10 w-10 h-10 rounded-full bg-gray-200"></div>
+                <div className="w-10 h-10 rounded-full bg-gray-200"></div>
               </div>
             )}
           </div>

@@ -43,17 +43,12 @@ export function createIdentiesClient(config: IdentiesClientConfig = {}) {
   );
 
   const getCurrentUser = async (authToken: string): Promise<User> => {
-    const response = await client.get<User>("/userinfo", {
+    const response = await client.get<User>("/user", {
       headers: {
         Authorization: `Bearer ${authToken}`,
       },
     });
 
-    return response.data;
-  };
-
-  const getUser = async (): Promise<User> => {
-    const response = await client.get<User>("/user");
     return response.data;
   };
 
@@ -76,7 +71,6 @@ export function createIdentiesClient(config: IdentiesClientConfig = {}) {
 
   return {
     getCurrentUser,
-    getUser,
     updateUser,
     request,
   };

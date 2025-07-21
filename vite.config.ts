@@ -7,6 +7,14 @@ import dts from "vite-plugin-dts";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), dts()],
+  optimizeDeps: {
+    esbuildOptions: {
+      jsx: "automatic",
+    },
+  },
+  define: {
+    global: "globalThis", // Sometimes needed for libraries
+  },
   build: {
     lib: {
       entry: resolve(__dirname, "./src/main.ts"),
@@ -14,12 +22,11 @@ export default defineConfig({
       fileName: "core-ui",
     },
     rollupOptions: {
-      external: ["react", "react-dom", "react/jsx-runtime"],
+      external: ["react", "react-dom"],
       output: {
         globals: {
           react: "React",
           "react-dom": "ReactDOM",
-          "react/jsx-runtime": "react/jsx-runtime",
         },
       },
     },

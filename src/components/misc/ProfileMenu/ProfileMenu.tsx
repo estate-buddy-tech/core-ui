@@ -43,7 +43,7 @@ export function ProfileMenu({
   if (loading) {
     return (
       <div className="animate-pulse">
-        <div className="rounded-full bg-gray-400 w-10 h-10"></div>
+        <div className="rounded-full bg-gray-200 w-10 h-10"></div>
       </div>
     );
   }
@@ -75,7 +75,7 @@ export function ProfileMenu({
             </Avatar>
             {!loaded && (
               <div className="animate-pulse absolute top-0">
-                <div className="size-10 w-10 h-10 rounded-full bg-gray-500"></div>
+                <div className="size-10 w-10 h-10 rounded-full bg-gray-200"></div>
               </div>
             )}
           </div>

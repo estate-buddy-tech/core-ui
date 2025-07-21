@@ -22,7 +22,7 @@ export interface UseIdentiesReturn {
 }
 
 export function useIdenties(config: UseIdentiesConfig = {}): UseIdentiesReturn {
-  const { autoFetchUser = true, token, ...clientConfig } = config;
+  const { token, ...clientConfig } = config;
 
   // Create client instance
   const client: any = createIdentiesClient(clientConfig);
@@ -70,7 +70,7 @@ export function useIdenties(config: UseIdentiesConfig = {}): UseIdentiesReturn {
     if (token) {
       fetchUser();
     }
-  }, [autoFetchUser, token]);
+  }, [token]);
 
   return {
     client,

@@ -14,6 +14,7 @@ import {
   SelectValue,
 } from "../../ui/select";
 import { useIdentiesContext } from "../../../provider/IdentiesProvider";
+import { cn } from "../../../utils/misc";
 
 interface Props {
   selectedTheme: string;
@@ -32,6 +33,7 @@ export function ProfileMenu({
 }: Props) {
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
   const { user, loading, updateUser } = useIdentiesContext();
+  const [loaded, setLoaded] = React.useState(false);
 
   const onUpdateTheme = async (value: string) => {
     onSetTheme(value);
@@ -41,7 +43,7 @@ export function ProfileMenu({
   if (loading) {
     return (
       <div className="animate-pulse">
-        <div className="size-10 rounded-full bg-gray-200"></div>
+        <div className="rounded-full bg-gray-400 w-10 h-10"></div>
       </div>
     );
   }
@@ -58,9 +60,25 @@ export function ProfileMenu({
     return (
       <DropdownMenu open={isDropdownOpen} onOpenChange={setIsDropdownOpen}>
         <DropdownMenuTrigger asChild className="cursor-pointer">
-          <Avatar>
-            <AvatarImage src={user?.avatar_url || defaultAvatar} />
-          </Avatar>
+          <div className="relative">
+            <Avatar>
+              <AvatarImage
+                className={cn(
+                  "transition-all duration-500",
+                  loaded ? "opacity-100" : "opacity-0"
+                )}
+                src={user.avatar_url}
+                loading="lazy"
+                alt="test"
+                onLoad={() => setLoaded(true)}
+              />
+            </Avatar>
+            {!loaded && (
+              <div className="animate-pulse absolute top-0">
+                <div className="size-10 w-10 h-10 rounded-full bg-gray-500"></div>
+              </div>
+            )}
+          </div>
         </DropdownMenuTrigger>
         <DropdownMenuContent
           className="flex w-[16rem] flex-col px-5 py-5"

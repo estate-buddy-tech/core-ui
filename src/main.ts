@@ -1,5 +1,6 @@
 // Types;
 export * from "./types/user";
+import "../src/styles/layout.css";
 
 // Client
 export { createIdentiesClient, type IdentiesClientConfig } from "./api/client";

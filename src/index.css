@@ -1,37 +1,24 @@
 @import "tailwindcss";
 
-/* Variables */
-:root {
-  @apply [--main-sidebar-width:0rem] [--margin-x:1rem] [--sidebar-panel-min-width:64px] [--sidebar-panel-width:300px] md:[--margin-x:1.5rem] md:[--sidebar-panel-width:220px] lg:[--main-sidebar-width:0rem] xl:[--margin-x:4rem];
-}
-
-.has-min-sidebar {
-  @apply xl:[--margin-x:1.5rem];
-}
-
-.is-sidebar-open {
-  @apply xl:[--margin-x:1.5rem];
-}
-
 @theme {
   --color-background: #f8f9fb;
   --color-foreground: #333333;
-  --color-card: #FFFFFF;
+  --color-card: #ffffff;
   --color-card-foreground: #333333;
-  --color-popover: #FFFFFF;
+  --color-popover: #ffffff;
   --color-popover-foreground: #e5e5e5;
   --color-primary: #5bbc26;
   --color-primary-foreground: #ffffff;
   --color-secondary: #f3f4f6;
   --color-secondary-foreground: #4b5563;
   --color-muted: #f9fafb;
-  --color-muted-foreground:#6b7280;
+  --color-muted-foreground: #6b7280;
   --color-accent: #e0f8cf;
   --color-accent-foreground: #2d5b19;
-  --color-destructive:#ef4444;
+  --color-destructive: #ef4444;
   --color-destructive-foreground: #ffffff;
   --color-border: #e7ecf4;
-  --color-input:  #e7ecf4;
+  --color-input: #e7ecf4;
   --color-ring: #e05d38;
 }
 

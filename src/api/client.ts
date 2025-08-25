@@ -6,14 +6,14 @@ import axios, {
 import type { User, UserUpdate, ApiError } from "../types/user";
 
 export interface IdentiesClientConfig {
-  baseURL?: string;
+  identiesApiUrl?: string;
   timeout?: number;
   headers?: Record<string, string>;
   token?: string;
 }
 
 export function createIdentiesClient(config: IdentiesClientConfig = {}) {
-  const baseURL = config.baseURL || "http://localhost:8000";
+  const baseURL = config.identiesApiUrl || "http://localhost:8000";
 
   const client: AxiosInstance = axios.create({
     baseURL,

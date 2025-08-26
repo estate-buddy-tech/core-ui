@@ -8,9 +8,6 @@ export interface UseIdentiesConfig extends IdentiesClientConfig {
 }
 
 export interface UseIdentiesReturn {
-  // Client instance
-  client: typeof createIdentiesClient;
-
   // User state
   user: User | null;
   loading: boolean;
@@ -21,11 +18,11 @@ export interface UseIdentiesReturn {
   updateUser: (userUpdate: UserUpdate) => Promise<void>;
 }
 
-export function useIdenties(config: UseIdentiesConfig = {}): UseIdentiesReturn {
+export function useIdenties(config: UseIdentiesConfig): UseIdentiesReturn {
   const { token, ...clientConfig } = config;
 
   // Create client instance
-  const client: any = createIdentiesClient(clientConfig);
+  const client = createIdentiesClient({ ...clientConfig, token });
 
   // State
   const [user, setUser] = useState<User | null>(null);
@@ -38,7 +35,7 @@ export function useIdenties(config: UseIdentiesConfig = {}): UseIdentiesReturn {
     setError(null);
 
     try {
-      const userData = await client.getCurrentUser(token!);
+      const userData = await client.getCurrentUser();
       setUser(userData);
     } catch (err) {
       setError(err as ApiError);
@@ -54,7 +51,7 @@ export function useIdenties(config: UseIdentiesConfig = {}): UseIdentiesReturn {
       setError(null);
 
       try {
-        const updatedUser = await client.updateUser(userUpdate, token!);
+        const updatedUser = await client.updateUser(userUpdate);
         setUser(updatedUser);
       } catch (err) {
         setError(err as ApiError);
@@ -73,7 +70,6 @@ export function useIdenties(config: UseIdentiesConfig = {}): UseIdentiesReturn {
   }, [token]);
 
   return {
-    client,
     user,
     loading,
     fetchUser,

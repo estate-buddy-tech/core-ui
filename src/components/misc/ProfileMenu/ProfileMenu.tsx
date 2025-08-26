@@ -13,8 +13,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../../ui/select";
-import { useIdentiesContext } from "../../../provider/IdentiesProvider";
 import { cn } from "../../../utils/misc";
+import { useCoreUI } from "../../../main";
 
 interface Props {
   selectedTheme: string;
@@ -32,7 +32,7 @@ export function ProfileMenu({
   defaultAvatar,
 }: Props) {
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
-  const { user, loading, updateUser } = useIdentiesContext();
+  const { user, loadingRequest, updateUser } = useCoreUI();
   const [loaded, setLoaded] = React.useState(false);
 
   const onUpdateTheme = async (value: string) => {
@@ -40,7 +40,7 @@ export function ProfileMenu({
     await updateUser({ theme_preference: value });
   };
 
-  if (loading) {
+  if (loadingRequest) {
     return (
       <div className="animate-pulse">
         <div className="rounded-full bg-gray-200 w-10 h-10"></div>

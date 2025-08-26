@@ -6,13 +6,13 @@ import axios, {
 import type { User, UserUpdate, ApiError } from "../types/user";
 
 export interface IdentiesClientConfig {
-  identiesApiUrl?: string;
+  identiesApiUrl: string;
+  token: string;
   timeout?: number;
   headers?: Record<string, string>;
-  token?: string;
 }
 
-export function createIdentiesClient(config: IdentiesClientConfig = {}) {
+export function createIdentiesClient(config: IdentiesClientConfig) {
   const baseURL = config.identiesApiUrl || "http://localhost:8000";
 
   const client: AxiosInstance = axios.create({
@@ -20,6 +20,7 @@ export function createIdentiesClient(config: IdentiesClientConfig = {}) {
     timeout: config.timeout || 10000,
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${config.token}`,
       ...config.headers,
     },
   });
@@ -42,25 +43,14 @@ export function createIdentiesClient(config: IdentiesClientConfig = {}) {
     }
   );
 
-  const getCurrentUser = async (authToken: string): Promise<User> => {
-    const response = await client.get<User>("/user", {
-      headers: {
-        Authorization: `Bearer ${authToken}`,
-      },
-    });
+  const getCurrentUser = async (): Promise<User> => {
+    const response = await client.get<User>("/user");
 
     return response.data;
   };
 
-  const updateUser = async (
-    userUpdate: UserUpdate,
-    authToken: string
-  ): Promise<User> => {
-    const response = await client.put<User>("/user", userUpdate, {
-      headers: {
-        Authorization: `Bearer ${authToken}`,
-      },
-    });
+  const updateUser = async (userUpdate: UserUpdate): Promise<User> => {
+    const response = await client.put<User>("/user", userUpdate);
     return response.data;
   };
 

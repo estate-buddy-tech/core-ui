@@ -9,17 +9,17 @@ This directory contains reusable form components that provide consistent design 
 A reusable form field component that handles labels, inputs, error messages, and validation.
 
 ```tsx
-import { FormField } from '@/components/Form'
-;<FormField
+import { FormField } from "@/components/Form";
+<FormField
   label="Name"
   name="name"
   type="text"
   required={true}
   error={errorFields?.name}
-  onChange={(value) => onRemoveError('name', value)}
+  onChange={(value) => onRemoveError("name", value)}
   autoFocus={true}
   placeholder="Enter name"
-/>
+/>;
 ```
 
 **Props:**
@@ -42,26 +42,27 @@ import { FormField } from '@/components/Form'
 A complete form wrapper that provides consistent form layout with Remix Form handling.
 
 ```tsx
-import { FormWrapper } from '@/components/Form'
-;<FormWrapper
+import { FormWrapper } from "@/components/Form";
+<FormWrapper
   title="Create Item"
   method="POST"
-  onCancel={() => navigate('/back')}
-  isSubmitting={state === 'submitting'}
+  onCancel={() => navigate("/back")}
+  isSubmitting={state === "submitting"}
   hiddenInputs={{
     token: token,
     workspace_id: params.workspace_id,
-  }}>
+  }}
+>
   <FormField
     label="Name"
     name="name"
     required
     error={errorFields?.name}
-    onChange={(value) => onRemoveError('name', value)}
+    onChange={(value) => onRemoveError("name", value)}
   />
 
   <FormField label="Description" name="description" type="textarea" />
-</FormWrapper>
+</FormWrapper>;
 ```
 
 **Props:**
@@ -97,17 +98,19 @@ import { FormWrapper } from '@/components/Form'
           <Input
             id="name"
             name="name"
-            onChange={(e) => onRemoveError('name', e.target.value)}
-            className={cn(errorFields?.name && 'input-error')}
+            onChange={(e) => onRemoveError("name", e.target.value)}
+            className={cn(errorFields?.name && "input-error")}
           />
-          {errorFields?.name && <span className="error-message">{errorFields.name}</span>}
+          {errorFields?.name && (
+            <span className="error-message">{errorFields.name}</span>
+          )}
         </div>
         <div className="mt-10 flex justify-end gap-2">
           <Button type="button" variant="outline" onClick={onCancel}>
             Cancel
           </Button>
-          <Button type="submit" disabled={state === 'submitting'}>
-            {state === 'submitting' ? 'Saving...' : 'Save'}
+          <Button type="submit" disabled={state === "submitting"}>
+            {state === "submitting" ? "Saving..." : "Save"}
           </Button>
         </div>
       </Form>
@@ -122,14 +125,15 @@ import { FormWrapper } from '@/components/Form'
 <FormWrapper
   title="Create Plugin"
   onCancel={onCancel}
-  isSubmitting={state === 'submitting'}
-  hiddenInputs={{ token }}>
+  isSubmitting={state === "submitting"}
+  hiddenInputs={{ token }}
+>
   <FormField
     label="Name"
     name="name"
     required
     error={errorFields?.name}
-    onChange={(value) => onRemoveError('name', value)}
+    onChange={(value) => onRemoveError("name", value)}
   />
 </FormWrapper>
 ```

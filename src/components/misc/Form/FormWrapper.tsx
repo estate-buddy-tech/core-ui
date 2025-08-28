@@ -7,11 +7,11 @@ import { cn } from "../../../utils/misc";
 interface FormWrapperProps {
   title: string;
   children: React.ReactNode;
-  method?: "POST" | "PUT" | "PATCH" | "DELETE";
+  method: "POST" | "PUT" | "PATCH" | "DELETE";
+  isSubmitting: boolean;
   onCancel?: () => void;
   submitText?: string;
   cancelText?: string;
-  isSubmitting?: boolean;
   className?: string;
   showActions?: boolean;
   actions?: React.ReactNode;

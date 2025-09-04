@@ -6,7 +6,6 @@ import {
   SelectTrigger,
 } from "../../ui/select";
 import { Button } from "../../ui/button";
-import Separator from "../../ui/separator";
 import { cn } from "../../../utils/misc";
 import React from "react";
 
@@ -111,7 +110,7 @@ const FormSelect = React.forwardRef<HTMLButtonElement, FormSelectProps>(
 
             {/* Show separator if there are actions and options */}
             {showSeparator && actions.length > 0 && options.length > 0 && (
-              <Separator orientation="horizontal" className="my-1" />
+              <div className="my-1 bg-border h-[1px] w-full"></div>
             )}
 
             {/* Render action buttons */}

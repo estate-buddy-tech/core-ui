@@ -22,6 +22,7 @@ interface Props {
   actionLogout: () => void;
   actionProfile: () => void;
   defaultAvatar: string;
+  menus?: { label: string; icon: React.ReactNode; onClick: () => void }[];
 }
 
 export function ProfileMenu({
@@ -30,6 +31,7 @@ export function ProfileMenu({
   actionLogout,
   actionProfile,
   defaultAvatar,
+  menus,
 }: Props) {
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
   const { user, loadingRequest, updateUser } = useCoreUI();
@@ -137,18 +139,32 @@ export function ProfileMenu({
               </SelectContent>
             </Select>
           </div>
-          <div className="flex flex-col gap-2">
-            <div className="border-y py-2">
+          <div className="flex flex-col gap-1">
+            <div className="border-y py-1">
               <button
                 className="flex w-full flex-row items-center gap-2 rounded-sm px-3 py-2 hover:bg-muted"
                 onClick={actionProfile}
               >
                 <UserCog size={16} />
-                <span>Your Profile</span>
+                <span>Your Profiles</span>
               </button>
             </div>
+            {menus?.length !== 0 &&
+              menus?.map((menu) => {
+                return (
+                  <div key={menu.label} className="border-b pb-1">
+                    <button
+                      className="flex w-full flex-row items-center gap-2 rounded-sm px-3 py-2 hover:bg-muted"
+                      onClick={menu.onClick}
+                    >
+                      {menu.icon}
+                      <span>{menu.label}</span>
+                    </button>
+                  </div>
+                );
+              })}
             <button
-              className="flex w-full flex-row items-center gap-2 rounded-sm px-3 py-2 hover:bg-muted"
+              className="flex w-full flex-row items-center gap-2 rounded-sm px-3 py-2 hover:bg-destructive hover:text-white transition-all duration-200"
               onClick={actionLogout}
             >
               <LogOut size={16} />
